@@ -1,65 +1,65 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { MOCK_CRIME_RECORDS, INITIAL_CHAT_MESSAGES, SAMPLE_QUERIES } from './data/mockKspData';
 
-// Native SVG Icons
-const ShieldIcon = ({ className = "w-5 h-5" }) => (
-  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+// Native SVG Icons with explicit fixed dimensions
+const ShieldIcon = ({ style, className }) => (
+  <svg style={{ width: '18px', height: '18px', flexShrink: 0, ...style }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
   </svg>
 );
 
-const SparklesIcon = ({ className = "w-5 h-5" }) => (
-  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+const SparklesIcon = ({ style }) => (
+  <svg style={{ width: '16px', height: '16px', flexShrink: 0, ...style }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4M4 19h4M13 3l2.5 6.5L22 12l-6.5 2.5L13 21l-2.5-6.5L4 12l6.5-2.5L13 3z" />
   </svg>
 );
 
-const MapPinIcon = ({ className = "w-5 h-5" }) => (
-  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+const MapPinIcon = ({ style }) => (
+  <svg style={{ width: '14px', height: '14px', flexShrink: 0, ...style }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
   </svg>
 );
 
-const NetworkIcon = ({ className = "w-5 h-5" }) => (
-  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+const NetworkIcon = ({ style }) => (
+  <svg style={{ width: '14px', height: '14px', flexShrink: 0, ...style }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
   </svg>
 );
 
-const BarChartIcon = ({ className = "w-5 h-5" }) => (
-  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+const BarChartIcon = ({ style }) => (
+  <svg style={{ width: '14px', height: '14px', flexShrink: 0, ...style }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
   </svg>
 );
 
-const MicIcon = ({ className = "w-5 h-5" }) => (
-  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+const MicIcon = ({ style }) => (
+  <svg style={{ width: '16px', height: '16px', flexShrink: 0, ...style }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
   </svg>
 );
 
-const SendIcon = ({ className = "w-5 h-5" }) => (
-  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+const SendIcon = ({ style }) => (
+  <svg style={{ width: '14px', height: '14px', flexShrink: 0, ...style }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
   </svg>
 );
 
-const DownloadIcon = ({ className = "w-5 h-5" }) => (
-  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+const DownloadIcon = ({ style }) => (
+  <svg style={{ width: '14px', height: '14px', flexShrink: 0, ...style }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
   </svg>
 );
 
-const GlobeIcon = ({ className = "w-5 h-5" }) => (
-  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+const GlobeIcon = ({ style }) => (
+  <svg style={{ width: '14px', height: '14px', flexShrink: 0, ...style }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.6 9h16.8M3.6 15h16.8" />
   </svg>
 );
 
-const ServerIcon = ({ className = "w-5 h-5" }) => (
-  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+const ServerIcon = ({ style }) => (
+  <svg style={{ width: '14px', height: '14px', flexShrink: 0, ...style }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2" />
   </svg>
 );
@@ -196,48 +196,48 @@ export default function App() {
   return (
     <div style={{ minHeight: '100vh', backgroundColor: '#0b132b', color: '#f8fafc', fontFamily: 'Inter, sans-serif', display: 'flex', flexDirection: 'column' }}>
       
-      {/* CLEAN HEADER BAR */}
-      <header style={{ height: '64px', borderBottom: '1px solid #1e293b', backgroundColor: 'rgba(15, 23, 42, 0.95)', padding: '0 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'sticky', top: 0, zIndex: 50 }}>
+      {/* ULTRA CRISP HEADER BAR */}
+      <header style={{ height: '60px', borderBottom: '1px solid #1e293b', backgroundColor: '#0f172a', padding: '0 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'sticky', top: 0, zIndex: 50 }}>
         
         {/* Left Title Group */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <div style={{ padding: '8px', backgroundColor: 'rgba(37, 99, 235, 0.2)', border: '1px solid rgba(59, 130, 246, 0.3)', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-            <ShieldIcon className="w-5 h-5 text-blue-400" />
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <div style={{ padding: '6px', backgroundColor: 'rgba(37, 99, 235, 0.2)', border: '1px solid rgba(59, 130, 246, 0.3)', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            <ShieldIcon style={{ color: '#60a5fa' }} />
           </div>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <h1 style={{ fontWeight: 700, fontSize: '17px', margin: 0, color: '#ffffff', letterSpacing: '-0.02em' }}>KSP CrimeIntel AI</h1>
+              <h1 style={{ fontWeight: 700, fontSize: '16px', margin: 0, color: '#ffffff', letterSpacing: '-0.02em' }}>KSP CrimeIntel AI</h1>
               <span style={{ padding: '2px 8px', fontSize: '10px', backgroundColor: 'rgba(6, 182, 212, 0.15)', color: '#67e8f9', border: '1px solid rgba(6, 182, 212, 0.3)', borderRadius: '9999px', fontFamily: 'monospace', fontWeight: 600 }}>
                 Catalyst Native
               </span>
             </div>
-            <p style={{ fontSize: '11px', color: '#94a3b8', margin: 0 }}>Karnataka State Police Conversational Intelligence Platform</p>
+            <p style={{ fontSize: '10px', color: '#94a3b8', margin: 0 }}>Karnataka State Police Conversational Intelligence Platform</p>
           </div>
         </div>
 
         {/* Right Status Badges & Controls */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '6px 10px', backgroundColor: '#0f172a', border: '1px solid #334155', borderRadius: '8px', fontSize: '11px', fontFamily: 'monospace', flexShrink: 0 }}>
-            <ServerIcon className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" />
-            <span style={{ color: '#94a3b8' }}>Project:</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '4px 10px', backgroundColor: '#1e293b', border: '1px solid #334155', borderRadius: '6px', fontSize: '11px', fontFamily: 'monospace', flexShrink: 0 }}>
+            <ServerIcon style={{ color: '#34d399' }} />
+            <span style={{ color: '#cbd5e1' }}>Project:</span>
             <span style={{ color: '#34d399', fontWeight: 600 }}>Project-Rainfall</span>
             <span style={{ color: '#64748b' }}>(ID: 48882000000013025)</span>
           </div>
 
           <button 
             onClick={() => setIsKannada(!isKannada)}
-            style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '6px 12px', backgroundColor: '#1e293b', border: '1px solid #334155', borderRadius: '8px', fontSize: '12px', color: '#f8fafc', cursor: 'pointer', flexShrink: 0 }}
+            style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '5px 10px', backgroundColor: '#1e293b', border: '1px solid #334155', borderRadius: '6px', fontSize: '11px', color: '#f8fafc', cursor: 'pointer', flexShrink: 0 }}
           >
-            <GlobeIcon className="w-3.5 h-3.5 text-cyan-400" />
+            <GlobeIcon style={{ color: '#22d3ee' }} />
             <span>{isKannada ? 'ಕನ್ನಡ' : 'English'}</span>
           </button>
 
           <button 
             onClick={() => setShowReportModal(true)}
-            style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '6px 14px', backgroundColor: '#2563eb', border: 'none', borderRadius: '8px', fontSize: '12px', fontWeight: 600, color: '#ffffff', cursor: 'pointer', flexShrink: 0, boxShadow: '0 4px 12px rgba(37, 99, 235, 0.3)' }}
+            style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '6px 12px', backgroundColor: '#2563eb', border: 'none', borderRadius: '6px', fontSize: '11px', fontWeight: 600, color: '#ffffff', cursor: 'pointer', flexShrink: 0 }}
           >
-            <DownloadIcon className="w-3.5 h-3.5" />
+            <DownloadIcon />
             <span>SCRB Report PDF</span>
           </button>
         </div>
@@ -245,26 +245,26 @@ export default function App() {
       </header>
 
       {/* MAIN CONTAINER */}
-      <div style={{ flex: 1, display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: 0, height: 'calc(100vh - 64px)' }}>
+      <div style={{ flex: 1, display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: 0, height: 'calc(100vh - 60px)' }}>
         
         {/* LEFT COLUMN: CHAT (4 Cols) */}
         <div style={{ gridColumn: 'span 4', borderRight: '1px solid #1e293b', backgroundColor: 'rgba(15, 23, 42, 0.5)', display: 'flex', flexDirection: 'column', height: '100%' }}>
           
-          <div style={{ padding: '14px 16px', borderBottom: '1px solid #1e293b', display: 'flex', alignItems: 'center', justifyBetween: 'space-between', backgroundColor: 'rgba(15, 23, 42, 0.8)' }}>
+          <div style={{ padding: '12px 14px', borderBottom: '1px solid #1e293b', display: 'flex', alignItems: 'center', justifyBetween: 'space-between', backgroundColor: 'rgba(15, 23, 42, 0.8)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <SparklesIcon className="w-4 h-4 text-cyan-400" />
+              <SparklesIcon style={{ color: '#22d3ee' }} />
               <h2 style={{ fontSize: '13px', fontWeight: 600, margin: 0, color: '#e2e8f0' }}>Conversational AI Investigator</h2>
             </div>
             <span style={{ fontSize: '10px', padding: '2px 6px', backgroundColor: '#1e293b', color: '#94a3b8', borderRadius: '4px' }}>Catalyst QuickML RAG</span>
           </div>
 
           {/* Quick Query Chips */}
-          <div style={{ padding: '10px 12px', backgroundColor: 'rgba(2, 6, 23, 0.5)', borderBottom: '1px solid #1e293b', display: 'flex', gap: '8px', overflowX: 'auto' }}>
+          <div style={{ padding: '8px 12px', backgroundColor: 'rgba(2, 6, 23, 0.5)', borderBottom: '1px solid #1e293b', display: 'flex', gap: '6px', overflowX: 'auto' }}>
             {SAMPLE_QUERIES.map((sq, idx) => (
               <button
                 key={idx}
                 onClick={() => handleSendMessage(sq.query)}
-                style={{ padding: '4px 10px', fontSize: '11px', backgroundColor: '#1e293b', border: '1px solid #334155', color: '#cbd5e1', borderRadius: '9999px', whiteSpace: 'nowrap', cursor: 'pointer' }}
+                style={{ padding: '4px 8px', fontSize: '10px', backgroundColor: '#1e293b', border: '1px solid #334155', color: '#cbd5e1', borderRadius: '9999px', whiteSpace: 'nowrap', cursor: 'pointer' }}
               >
                 {sq.label}
               </button>
@@ -272,44 +272,44 @@ export default function App() {
           </div>
 
           {/* Messages Feed */}
-          <div style={{ flex: 1, padding: '16px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '14px' }}>
+          <div style={{ flex: 1, padding: '14px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '12px' }}>
             {messages.map((msg) => (
               <div 
                 key={msg.id}
                 style={{ display: 'flex', gap: '10px', justifyContent: msg.sender === 'user' ? 'flex-end' : 'flex-start' }}
               >
                 {msg.sender === 'bot' && (
-                  <div style={{ width: '28px', height: '28px', borderRadius: '8px', backgroundColor: 'rgba(37, 99, 235, 0.25)', border: '1px solid rgba(59, 130, 246, 0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                    <ShieldIcon className="w-3.5 h-3.5 text-blue-400" />
+                  <div style={{ width: '26px', height: '26px', borderRadius: '6px', backgroundColor: 'rgba(37, 99, 235, 0.25)', border: '1px solid rgba(59, 130, 246, 0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <ShieldIcon style={{ width: '14px', height: '14px', color: '#60a5fa' }} />
                   </div>
                 )}
                 <div style={{
-                  maxWidth: '85%', borderRadius: '12px', padding: '10px 14px', fontSize: '12px', lineHeight: 1.5,
+                  maxWidth: '85%', borderRadius: '10px', padding: '8px 12px', fontSize: '11px', lineHeight: 1.5,
                   backgroundColor: msg.sender === 'user' ? '#2563eb' : 'rgba(30, 41, 59, 0.9)',
                   color: msg.sender === 'user' ? '#ffffff' : '#e2e8f0',
                   border: msg.sender === 'user' ? 'none' : '1px solid #334155'
                 }}>
                   <p style={{ margin: 0 }}>{isKannada && msg.kannadaText ? msg.kannadaText : msg.text}</p>
                   {msg.matchedRecord && (
-                    <div style={{ marginTop: '8px', paddingTop: '6px', borderTop: '1px solid #334155', display: 'flex', justifyContent: 'space-between', fontSize: '11px' }}>
+                    <div style={{ marginTop: '6px', paddingTop: '6px', borderTop: '1px solid #334155', display: 'flex', justifyContent: 'space-between', fontSize: '10px' }}>
                       <span style={{ color: '#67e8f9', fontFamily: 'monospace', fontWeight: 600 }}>{msg.matchedRecord.firNo}</span>
                       <span style={{ color: '#94a3b8' }}>{msg.matchedRecord.station}</span>
                     </div>
                   )}
-                  <span style={{ display: 'block', fontSize: '10px', opacity: 0.6, textAlign: 'right', marginTop: '4px' }}>{msg.timestamp}</span>
+                  <span style={{ display: 'block', fontSize: '9px', opacity: 0.6, textAlign: 'right', marginTop: '4px' }}>{msg.timestamp}</span>
                 </div>
               </div>
             ))}
           </div>
 
           {/* Input Bar */}
-          <div style={{ padding: '12px', borderTop: '1px solid #1e293b', backgroundColor: 'rgba(15, 23, 42, 0.9)' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', backgroundColor: '#020617', border: '1px solid #1e293b', borderRadius: '12px', padding: '6px' }}>
+          <div style={{ padding: '10px', borderTop: '1px solid #1e293b', backgroundColor: 'rgba(15, 23, 42, 0.9)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', backgroundColor: '#020617', border: '1px solid #1e293b', borderRadius: '10px', padding: '4px 8px' }}>
               <button 
                 onClick={handleVoiceToggle}
-                style={{ padding: '6px', background: 'none', border: 'none', color: isListening ? '#ef4444' : '#94a3b8', cursor: 'pointer' }}
+                style={{ padding: '4px', background: 'none', border: 'none', color: isListening ? '#ef4444' : '#94a3b8', cursor: 'pointer' }}
               >
-                <MicIcon className="w-4 h-4" />
+                <MicIcon />
               </button>
               
               <input
@@ -318,81 +318,81 @@ export default function App() {
                 onChange={(e) => setInputText(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
                 placeholder={isListening ? "Listening (Kannada/English)..." : "Ask KSP Crime Database..."}
-                style={{ flex: 1, backgroundColor: 'transparent', border: 'none', outline: 'none', fontSize: '12px', color: '#f8fafc' }}
+                style={{ flex: 1, backgroundColor: 'transparent', border: 'none', outline: 'none', fontSize: '11px', color: '#f8fafc' }}
               />
 
               <button
                 onClick={() => handleSendMessage()}
-                style={{ padding: '6px 12px', backgroundColor: '#2563eb', border: 'none', borderRadius: '8px', color: '#ffffff', cursor: 'pointer' }}
+                style={{ padding: '6px 10px', backgroundColor: '#2563eb', border: 'none', borderRadius: '6px', color: '#ffffff', cursor: 'pointer' }}
               >
-                <SendIcon className="w-3.5 h-3.5" />
+                <SendIcon />
               </button>
             </div>
           </div>
         </div>
 
         {/* RIGHT COLUMN: CANVAS (8 Cols) */}
-        <div style={{ gridColumn: 'span 8', padding: '16px', display: 'flex', flexDirection: 'column', gap: '14px', overflowY: 'auto', height: '100%' }}>
+        <div style={{ gridColumn: 'span 8', padding: '14px', display: 'flex', flexDirection: 'column', gap: '12px', overflowY: 'auto', height: '100%' }}>
           
           {/* METRICS ROW */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px' }}>
-            <div style={{ backgroundColor: 'rgba(15, 23, 42, 0.75)', border: '1px solid rgba(255, 255, 255, 0.08)', padding: '12px', borderRadius: '12px' }}>
-              <span style={{ fontSize: '11px', color: '#94a3b8' }}>Total FIRs Analyzed</span>
-              <div style={{ fontSize: '18px', fontWeight: 700, color: '#22d3ee', marginTop: '4px', fontFamily: 'monospace' }}>1,248</div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '10px' }}>
+            <div style={{ backgroundColor: 'rgba(15, 23, 42, 0.75)', border: '1px solid rgba(255, 255, 255, 0.08)', padding: '10px', borderRadius: '10px' }}>
+              <span style={{ fontSize: '10px', color: '#94a3b8' }}>Total FIRs Analyzed</span>
+              <div style={{ fontSize: '17px', fontWeight: 700, color: '#22d3ee', marginTop: '2px', fontFamily: 'monospace' }}>1,248</div>
             </div>
 
-            <div style={{ backgroundColor: 'rgba(15, 23, 42, 0.75)', border: '1px solid rgba(255, 255, 255, 0.08)', padding: '12px', borderRadius: '12px' }}>
-              <span style={{ fontSize: '11px', color: '#94a3b8' }}>Active Gang Networks</span>
-              <div style={{ fontSize: '18px', fontWeight: 700, color: '#c084fc', marginTop: '4px', fontFamily: 'monospace' }}>14</div>
+            <div style={{ backgroundColor: 'rgba(15, 23, 42, 0.75)', border: '1px solid rgba(255, 255, 255, 0.08)', padding: '10px', borderRadius: '10px' }}>
+              <span style={{ fontSize: '10px', color: '#94a3b8' }}>Active Gang Networks</span>
+              <div style={{ fontSize: '17px', fontWeight: 700, color: '#c084fc', marginTop: '2px', fontFamily: 'monospace' }}>14</div>
             </div>
 
-            <div style={{ backgroundColor: 'rgba(15, 23, 42, 0.75)', border: '1px solid rgba(255, 255, 255, 0.08)', padding: '12px', borderRadius: '12px' }}>
-              <span style={{ fontSize: '11px', color: '#94a3b8' }}>Top High-Risk MO</span>
-              <div style={{ fontSize: '13px', fontWeight: 700, color: '#f87171', marginTop: '4px' }}>Bike Snatching</div>
+            <div style={{ backgroundColor: 'rgba(15, 23, 42, 0.75)', border: '1px solid rgba(255, 255, 255, 0.08)', padding: '10px', borderRadius: '10px' }}>
+              <span style={{ fontSize: '10px', color: '#94a3b8' }}>Top High-Risk MO</span>
+              <div style={{ fontSize: '12px', fontWeight: 700, color: '#f87171', marginTop: '4px' }}>Bike Snatching</div>
             </div>
 
-            <div style={{ backgroundColor: 'rgba(15, 23, 42, 0.75)', border: '1px solid rgba(255, 255, 255, 0.08)', padding: '12px', borderRadius: '12px' }}>
-              <span style={{ fontSize: '11px', color: '#94a3b8' }}>Top Crime Hotspot</span>
-              <div style={{ fontSize: '13px', fontWeight: 700, color: '#fbbf24', marginTop: '4px' }}>Indiranagar PS</div>
+            <div style={{ backgroundColor: 'rgba(15, 23, 42, 0.75)', border: '1px solid rgba(255, 255, 255, 0.08)', padding: '10px', borderRadius: '10px' }}>
+              <span style={{ fontSize: '10px', color: '#94a3b8' }}>Top Crime Hotspot</span>
+              <div style={{ fontSize: '12px', fontWeight: 700, color: '#fbbf24', marginTop: '4px' }}>Indiranagar PS</div>
             </div>
           </div>
 
           {/* CANVAS BOX */}
-          <div style={{ flex: 1, backgroundColor: 'rgba(15, 23, 42, 0.75)', border: '1px solid #1e293b', borderRadius: '16px', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+          <div style={{ flex: 1, backgroundColor: 'rgba(15, 23, 42, 0.75)', border: '1px solid #1e293b', borderRadius: '14px', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
             
             {/* Tab Header */}
-            <div style={{ padding: '10px 14px', borderBottom: '1px solid #1e293b', backgroundColor: 'rgba(15, 23, 42, 0.9)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <div style={{ display: 'flex', gap: '6px', backgroundColor: '#020617', padding: '4px', borderRadius: '10px', border: '1px solid #1e293b' }}>
+            <div style={{ padding: '8px 12px', borderBottom: '1px solid #1e293b', backgroundColor: 'rgba(15, 23, 42, 0.9)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div style={{ display: 'flex', gap: '4px', backgroundColor: '#020617', padding: '3px', borderRadius: '8px', border: '1px solid #1e293b' }}>
                 <button
                   onClick={() => setActiveTab('map')}
-                  style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '6px 12px', borderRadius: '6px', fontSize: '12px', backgroundColor: activeTab === 'map' ? '#2563eb' : 'transparent', color: '#f8fafc', border: 'none', cursor: 'pointer' }}
+                  style={{ display: 'flex', alignItems: 'center', gap: '4px', padding: '5px 10px', borderRadius: '6px', fontSize: '11px', backgroundColor: activeTab === 'map' ? '#2563eb' : 'transparent', color: '#f8fafc', border: 'none', cursor: 'pointer' }}
                 >
-                  <MapPinIcon className="w-3.5 h-3.5" />
+                  <MapPinIcon />
                   <span>Spatial Hotspots</span>
                 </button>
 
                 <button
                   onClick={() => setActiveTab('network')}
-                  style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '6px 12px', borderRadius: '6px', fontSize: '12px', backgroundColor: activeTab === 'network' ? '#7c3aed' : 'transparent', color: '#f8fafc', border: 'none', cursor: 'pointer' }}
+                  style={{ display: 'flex', alignItems: 'center', gap: '4px', padding: '5px 10px', borderRadius: '6px', fontSize: '11px', backgroundColor: activeTab === 'network' ? '#7c3aed' : 'transparent', color: '#f8fafc', border: 'none', cursor: 'pointer' }}
                 >
-                  <NetworkIcon className="w-3.5 h-3.5" />
+                  <NetworkIcon />
                   <span>Suspect Link Graph</span>
                 </button>
 
                 <button
                   onClick={() => setActiveTab('analytics')}
-                  style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '6px 12px', borderRadius: '6px', fontSize: '12px', backgroundColor: activeTab === 'analytics' ? '#059669' : 'transparent', color: '#f8fafc', border: 'none', cursor: 'pointer' }}
+                  style={{ display: 'flex', alignItems: 'center', gap: '4px', padding: '5px 10px', borderRadius: '6px', fontSize: '11px', backgroundColor: activeTab === 'analytics' ? '#059669' : 'transparent', color: '#f8fafc', border: 'none', cursor: 'pointer' }}
                 >
-                  <BarChartIcon className="w-3.5 h-3.5" />
+                  <BarChartIcon />
                   <span>Demographics</span>
                 </button>
               </div>
 
-              <span style={{ fontSize: '11px', color: '#94a3b8', fontFamily: 'monospace' }}>FIR: {selectedRecord.firNo}</span>
+              <span style={{ fontSize: '10px', color: '#94a3b8', fontFamily: 'monospace' }}>FIR: {selectedRecord.firNo}</span>
             </div>
 
             {/* TAB CONTENT AREA */}
-            <div style={{ flex: 1, position: 'relative', backgroundColor: '#020617', minHeight: '380px' }}>
+            <div style={{ flex: 1, position: 'relative', backgroundColor: '#020617', minHeight: '360px' }}>
               {activeTab === 'map' && (
                 <div ref={mapRef} style={{ width: '100%', height: '100%', position: 'absolute', inset: 0 }} />
               )}
@@ -402,24 +402,24 @@ export default function App() {
               )}
 
               {activeTab === 'analytics' && (
-                <div style={{ padding: '20px', overflowY: 'auto' }}>
-                  <h3 style={{ fontSize: '15px', fontWeight: 700, margin: '0 0 6px 0', color: '#f8fafc' }}>Offender Recidivism & Time Distribution Analysis</h3>
-                  <p style={{ fontSize: '11px', color: '#94a3b8', margin: '0 0 16px 0' }}>Aggregated pattern intelligence across Bengaluru and Mysuru divisions.</p>
+                <div style={{ padding: '16px', overflowY: 'auto' }}>
+                  <h3 style={{ fontSize: '14px', fontWeight: 700, margin: '0 0 4px 0', color: '#f8fafc' }}>Offender Recidivism & Time Distribution Analysis</h3>
+                  <p style={{ fontSize: '10px', color: '#94a3b8', margin: '0 0 14px 0' }}>Aggregated pattern intelligence across Bengaluru and Mysuru divisions.</p>
                   
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '14px' }}>
-                    <div style={{ padding: '14px', backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '12px' }}>
-                      <span style={{ fontSize: '11px', color: '#94a3b8' }}>Peak Crime Hours</span>
-                      <div style={{ fontSize: '16px', fontWeight: 700, color: '#fbbf24', marginTop: '4px', fontFamily: 'monospace' }}>20:00 - 02:00 IST</div>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px' }}>
+                    <div style={{ padding: '12px', backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '10px' }}>
+                      <span style={{ fontSize: '10px', color: '#94a3b8' }}>Peak Crime Hours</span>
+                      <div style={{ fontSize: '15px', fontWeight: 700, color: '#fbbf24', marginTop: '4px', fontFamily: 'monospace' }}>20:00 - 02:00 IST</div>
                     </div>
 
-                    <div style={{ padding: '14px', backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '12px' }}>
-                      <span style={{ fontSize: '11px', color: '#94a3b8' }}>Repeat Offender Rate</span>
-                      <div style={{ fontSize: '16px', fontWeight: 700, color: '#f87171', marginTop: '4px', fontFamily: 'monospace' }}>42.5%</div>
+                    <div style={{ padding: '12px', backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '10px' }}>
+                      <span style={{ fontSize: '10px', color: '#94a3b8' }}>Repeat Offender Rate</span>
+                      <div style={{ fontSize: '15px', fontWeight: 700, color: '#f87171', marginTop: '4px', fontFamily: 'monospace' }}>42.5%</div>
                     </div>
 
-                    <div style={{ padding: '14px', backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '12px' }}>
-                      <span style={{ fontSize: '11px', color: '#94a3b8' }}>Dominant Modus Operandi</span>
-                      <div style={{ fontSize: '16px', fontWeight: 700, color: '#22d3ee', marginTop: '4px', fontFamily: 'monospace' }}>MO-TWO-WHEELER</div>
+                    <div style={{ padding: '12px', backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '10px' }}>
+                      <span style={{ fontSize: '10px', color: '#94a3b8' }}>Dominant Modus Operandi</span>
+                      <div style={{ fontSize: '15px', fontWeight: 700, color: '#22d3ee', marginTop: '4px', fontFamily: 'monospace' }}>MO-TWO-WHEELER</div>
                     </div>
                   </div>
                 </div>
@@ -427,15 +427,15 @@ export default function App() {
             </div>
 
             {/* RECORD DETAIL FOOTER */}
-            <div style={{ padding: '10px 14px', backgroundColor: 'rgba(15, 23, 42, 0.9)', borderTop: '1px solid #1e293b', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '11px' }}>
-              <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+            <div style={{ padding: '8px 12px', backgroundColor: 'rgba(15, 23, 42, 0.9)', borderTop: '1px solid #1e293b', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '10px' }}>
+              <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
                 <span style={{ fontFamily: 'monospace', fontWeight: 700, color: '#22d3ee' }}>{selectedRecord.firNo}</span>
                 <span style={{ color: '#cbd5e1' }}>{selectedRecord.crimeType}</span>
                 <span style={{ color: '#64748b' }}>|</span>
                 <span style={{ color: '#94a3b8' }}>{selectedRecord.station}</span>
               </div>
               <div>
-                <span style={{ color: '#94a3b8', marginRight: '6px' }}>Suspects:</span>
+                <span style={{ color: '#94a3b8', marginRight: '4px' }}>Suspects:</span>
                 <span style={{ color: '#fca5a5', fontWeight: 600 }}>{selectedRecord.suspects.join(', ')}</span>
               </div>
             </div>
@@ -449,32 +449,32 @@ export default function App() {
       {/* SCRB REPORT MODAL */}
       {showReportModal && (
         <div style={{ position: 'fixed', inset: 0, zIndex: 100, backgroundColor: 'rgba(2, 6, 23, 0.8)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px' }}>
-          <div style={{ backgroundColor: '#0f172a', border: '1px solid #334155', borderRadius: '16px', maxWidth: '480px', width: '100%', padding: '20px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #1e293b', paddingBottom: '10px', marginBottom: '14px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <ShieldIcon className="w-5 h-5 text-blue-400" />
-                <h3 style={{ margin: 0, fontWeight: 700, color: '#f8fafc', fontSize: '14px' }}>KSP Executive Crime Intelligence Brief</h3>
+          <div style={{ backgroundColor: '#0f172a', border: '1px solid #334155', borderRadius: '14px', maxWidth: '460px', width: '100%', padding: '18px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #1e293b', paddingBottom: '8px', marginBottom: '12px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <ShieldIcon style={{ color: '#60a5fa' }} />
+                <h3 style={{ margin: 0, fontWeight: 700, color: '#f8fafc', fontSize: '13px' }}>KSP Executive Crime Intelligence Brief</h3>
               </div>
-              <button onClick={() => setShowReportModal(false)} style={{ background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer', fontSize: '16px' }}>✕</button>
+              <button onClick={() => setShowReportModal(false)} style={{ background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer', fontSize: '14px' }}>✕</button>
             </div>
 
-            <div style={{ fontSize: '11px', fontFamily: 'monospace', color: '#cbd5e1', backgroundColor: '#020617', padding: '14px', borderRadius: '12px', border: '1px solid #1e293b', lineHeight: 1.6 }}>
-              <p style={{ margin: '0 0 6px 0' }}><strong style={{ color: '#60a5fa' }}>DOCUMENT ID:</strong> KSP-SCRB-REPORT-2026-0723</p>
-              <p style={{ margin: '0 0 6px 0' }}><strong style={{ color: '#60a5fa' }}>TARGET DIVISION:</strong> Bengaluru East & South Police Divisions</p>
-              <p style={{ margin: '0 0 6px 0' }}><strong style={{ color: '#60a5fa' }}>PRIMARY CASE:</strong> {selectedRecord.firNo} ({selectedRecord.crimeType})</p>
-              <p style={{ margin: '0 0 6px 0' }}><strong style={{ color: '#60a5fa' }}>KEY SUSPECTS:</strong> {selectedRecord.suspects.join(', ')}</p>
-              <p style={{ margin: '0 0 6px 0' }}><strong style={{ color: '#60a5fa' }}>MODUS OPERANDI:</strong> {selectedRecord.moCode}</p>
+            <div style={{ fontSize: '10.5px', fontFamily: 'monospace', color: '#cbd5e1', backgroundColor: '#020617', padding: '12px', borderRadius: '10px', border: '1px solid #1e293b', lineHeight: 1.5 }}>
+              <p style={{ margin: '0 0 4px 0' }}><strong style={{ color: '#60a5fa' }}>DOCUMENT ID:</strong> KSP-SCRB-REPORT-2026-0723</p>
+              <p style={{ margin: '0 0 4px 0' }}><strong style={{ color: '#60a5fa' }}>TARGET DIVISION:</strong> Bengaluru East & South Police Divisions</p>
+              <p style={{ margin: '0 0 4px 0' }}><strong style={{ color: '#60a5fa' }}>PRIMARY CASE:</strong> {selectedRecord.firNo} ({selectedRecord.crimeType})</p>
+              <p style={{ margin: '0 0 4px 0' }}><strong style={{ color: '#60a5fa' }}>KEY SUSPECTS:</strong> {selectedRecord.suspects.join(', ')}</p>
+              <p style={{ margin: '0 0 4px 0' }}><strong style={{ color: '#60a5fa' }}>MODUS OPERANDI:</strong> {selectedRecord.moCode}</p>
               <p style={{ margin: 0 }}><strong style={{ color: '#60a5fa' }}>RECOMMENDED ACTION:</strong> Deploy night beat patrols along Indiranagar 100ft Road and Jayanagar 4th Block between 20:00 - 02:00 IST.</p>
             </div>
 
-            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px', marginTop: '16px' }}>
-              <button onClick={() => setShowReportModal(false)} style={{ padding: '7px 14px', backgroundColor: '#1e293b', border: 'none', borderRadius: '8px', color: '#cbd5e1', cursor: 'pointer', fontSize: '12px' }}>Close</button>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '8px', marginTop: '14px' }}>
+              <button onClick={() => setShowReportModal(false)} style={{ padding: '6px 12px', backgroundColor: '#1e293b', border: 'none', borderRadius: '6px', color: '#cbd5e1', cursor: 'pointer', fontSize: '11px' }}>Close</button>
               <button 
                 onClick={() => {
                   alert("Executive PDF Report generated natively via Zoho Catalyst SmartBrowser!");
                   setShowReportModal(false);
                 }}
-                style={{ padding: '7px 14px', backgroundColor: '#2563eb', border: 'none', borderRadius: '8px', color: '#ffffff', fontWeight: 600, cursor: 'pointer', fontSize: '12px' }}
+                style={{ padding: '6px 12px', backgroundColor: '#2563eb', border: 'none', borderRadius: '6px', color: '#ffffff', fontWeight: 600, cursor: 'pointer', fontSize: '11px' }}
               >
                 Download PDF
               </button>
