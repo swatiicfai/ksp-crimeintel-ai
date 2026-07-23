@@ -66,25 +66,25 @@ flowchart TD
 - Dark-mode Leaflet map rendering real-time FIR cluster density across Bengaluru & Mysuru divisions.
 - Interactive color-coded markers (Red = High Risk, Orange = Moderate Risk) with popups revealing FIR numbers, suspect names, and station jurisdictions.
 
-![Spatial Hotspots Map](docs/screenshots/spatial_hotspots_map.png)
+![Spatial Hotspots Map](https://raw.githubusercontent.com/swatiicfai/ksp-crimeintel-ai/main/docs/screenshots/spatial_hotspots_map.png)
 
 ### 3. 🕸️ Suspect Link Graph & Gang Network Analysis
 - Dynamic node-edge network visualization built with Vis.js.
 - Uncovers hidden relationships between habitual offenders, bike gangs, burglary syndicates, and specific crime incidents.
 
-![Suspect Link Graph](docs/screenshots/suspect_link_graph.png)
+![Suspect Link Graph](https://raw.githubusercontent.com/swatiicfai/ksp-crimeintel-ai/main/docs/screenshots/suspect_link_graph.png)
 
 ### 4. 📊 Offender Recidivism & Demographic Analytics
 - Aggregated pattern intelligence highlighting peak crime hours (**20:00 - 02:00 IST**).
 - Repeat offender rate tracking (**42.5% recidivism benchmark**) and dominant MO breakdowns.
 
-![Demographics Analytics](docs/screenshots/demographics_analytics.png)
+![Demographics Analytics](https://raw.githubusercontent.com/swatiicfai/ksp-crimeintel-ai/main/docs/screenshots/demographics_analytics.png)
 
 ### 5. 📄 1-Click SCRB Executive Brief PDF Export
 - Generates standardized executive intelligence reports formatted for State Crime Records Bureau (SCRB) review.
 - Contains document IDs, target division highlights, primary suspect details, and recommended beat patrol routes.
 
-![SCRB Executive Brief Modal](docs/screenshots/scrb_report_brief.png)
+![SCRB Executive Brief Modal](https://raw.githubusercontent.com/swatiicfai/ksp-crimeintel-ai/main/docs/screenshots/scrb_report_brief.png)
 
 ---
 
