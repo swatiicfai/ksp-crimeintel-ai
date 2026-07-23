@@ -76,10 +76,11 @@ export default function App() {
   const leafletInstance = useRef(null);
   const networkRef = useRef(null);
 
+  // Initialize Leaflet map once on mount — div is always in DOM now
   useEffect(() => {
-    if (activeTab === 'map' && mapRef.current && !leafletInstance.current) {
+    const initMap = () => {
       const L = window.L;
-      if (!L) return;
+      if (!L || !mapRef.current || leafletInstance.current) return;
 
       const map = L.map(mapRef.current).setView([12.9716, 77.5946], 11);
       L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
@@ -91,7 +92,7 @@ export default function App() {
         const isHigh = record.riskLevel === 'HIGH';
         const customIcon = L.divIcon({
           className: 'custom-div-icon',
-          html: `<div style="background-color: ${isHigh ? '#ef4444' : '#f59e0b'}; width: 14px; height: 14px; border-radius: 50%; border: 2px solid #ffffff; box-shadow: 0 0 10px ${isHigh ? 'rgba(239, 68, 68, 0.8)' : 'rgba(245, 158, 11, 0.8)'};"></div>`,
+          html: `<div style="background-color: ${isHigh ? '#ef4444' : '#f59e0b'}; width: 14px; height: 14px; border-radius: 50%; border: 2px solid #ffffff; box-shadow: 0 0 10px ${isHigh ? 'rgba(239, 68, 68, 0.8)' : 'rgba(245, 158, 11, 0.8)'};">    </div>`,
           iconSize: [14, 14],
           iconAnchor: [7, 7]
         });
@@ -105,22 +106,28 @@ export default function App() {
             <b>Suspects:</b> ${record.suspects.join(', ')}
           </div>
         `);
-
-        marker.on('click', () => {
-          setSelectedRecord(record);
-        });
+        marker.on('click', () => { setSelectedRecord(record); });
       });
 
       leafletInstance.current = map;
-      // Initial size fix after first render
-      setTimeout(() => { map.invalidateSize(); }, 200);
-    }
+      setTimeout(() => { map.invalidateSize(); }, 300);
+    };
 
-    // Fix blank map on tab switch — always invalidate size when map tab becomes active
+    // Try immediately, or wait for Leaflet CDN to load
+    if (window.L) {
+      initMap();
+    } else {
+      const interval = setInterval(() => {
+        if (window.L) { clearInterval(interval); initMap(); }
+      }, 200);
+      return () => clearInterval(interval);
+    }
+  }, []); // run once on mount
+
+  // Invalidate map size whenever switching back to map tab
+  useEffect(() => {
     if (activeTab === 'map' && leafletInstance.current) {
-      setTimeout(() => {
-        leafletInstance.current.invalidateSize();
-      }, 150);
+      setTimeout(() => { leafletInstance.current.invalidateSize(); }, 200);
     }
   }, [activeTab]);
 
@@ -400,18 +407,34 @@ export default function App() {
               <span style={{ fontSize: '10px', color: '#94a3b8', fontFamily: 'monospace' }}>FIR: {selectedRecord.firNo}</span>
             </div>
 
-            {/* TAB CONTENT AREA */}
+            {/* TAB CONTENT AREA — all 3 panels always in DOM, toggled by display */}
             <div style={{ flex: 1, position: 'relative', backgroundColor: '#020617', minHeight: '360px' }}>
-              {activeTab === 'map' && (
-                <div ref={mapRef} style={{ width: '100%', height: '100%', position: 'absolute', inset: 0 }} />
-              )}
+              {/* MAP PANEL — always mounted so Leaflet div is never destroyed */}
+              <div
+                ref={mapRef}
+                style={{
+                  width: '100%', height: '100%', position: 'absolute', inset: 0,
+                  display: activeTab === 'map' ? 'block' : 'none'
+                }}
+              />
 
-              {activeTab === 'network' && (
-                <div ref={networkRef} style={{ width: '100%', height: '100%', position: 'absolute', inset: 0, backgroundColor: '#020617' }} />
-              )}
+              {/* NETWORK PANEL */}
+              <div
+                ref={networkRef}
+                style={{
+                  width: '100%', height: '100%', position: 'absolute', inset: 0,
+                  backgroundColor: '#020617',
+                  display: activeTab === 'network' ? 'block' : 'none'
+                }}
+              />
 
-              {activeTab === 'analytics' && (
-                <div style={{ padding: '16px', overflowY: 'auto' }}>
+              {/* ANALYTICS PANEL */}
+              <div
+                style={{
+                  position: 'absolute', inset: 0, overflowY: 'auto',
+                  display: activeTab === 'analytics' ? 'block' : 'none'
+                }}
+              >
                   <h3 style={{ fontSize: '14px', fontWeight: 700, margin: '0 0 4px 0', color: '#f8fafc' }}>Offender Recidivism & Time Distribution Analysis</h3>
                   <p style={{ fontSize: '10px', color: '#94a3b8', margin: '0 0 14px 0' }}>Aggregated pattern intelligence across Bengaluru and Mysuru divisions.</p>
                   
@@ -432,8 +455,7 @@ export default function App() {
                     </div>
                   </div>
                 </div>
-              )}
-            </div>
+              </div>
 
             {/* RECORD DETAIL FOOTER */}
             <div style={{ padding: '8px 12px', backgroundColor: 'rgba(15, 23, 42, 0.9)', borderTop: '1px solid #1e293b', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '10px' }}>
