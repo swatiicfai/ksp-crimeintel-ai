@@ -112,6 +112,15 @@ export default function App() {
       });
 
       leafletInstance.current = map;
+      // Initial size fix after first render
+      setTimeout(() => { map.invalidateSize(); }, 200);
+    }
+
+    // Fix blank map on tab switch — always invalidate size when map tab becomes active
+    if (activeTab === 'map' && leafletInstance.current) {
+      setTimeout(() => {
+        leafletInstance.current.invalidateSize();
+      }, 150);
     }
   }, [activeTab]);
 
