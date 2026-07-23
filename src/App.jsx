@@ -98,7 +98,7 @@ export default function App() {
 
         const marker = L.marker([record.lat, record.lng], { icon: customIcon }).addTo(map);
         marker.bindPopup(`
-          <div style="color: #0f172a; font-family: sans-serif; font-size: 12px;">
+          <div style="color: #0f172a; font-family: sans-serif; font-size: 12px; padding: 4px;">
             <strong style="color: #1e3a8a;">${record.firNo}</strong><br/>
             <b>Station:</b> ${record.station}<br/>
             <b>Type:</b> ${record.crimeType}<br/>
@@ -196,47 +196,52 @@ export default function App() {
   return (
     <div style={{ minHeight: '100vh', backgroundColor: '#0b132b', color: '#f8fafc', fontFamily: 'Inter, sans-serif', display: 'flex', flexDirection: 'column' }}>
       
-      {/* HEADER BAR */}
-      <header style={{ height: '64px', borderBottom: '1px solid #1e293b', backgroundColor: 'rgba(15, 23, 42, 0.9)', padding: '0 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'sticky', top: 0, zIndex: 50 }}>
+      {/* CLEAN HEADER BAR */}
+      <header style={{ height: '64px', borderBottom: '1px solid #1e293b', backgroundColor: 'rgba(15, 23, 42, 0.95)', padding: '0 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'sticky', top: 0, zIndex: 50 }}>
+        
+        {/* Left Title Group */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <div style={{ padding: '8px', backgroundColor: 'rgba(37, 99, 235, 0.2)', border: '1px solid rgba(59, 130, 246, 0.3)', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <ShieldIcon className="w-6 h-6 text-blue-400" />
+          <div style={{ padding: '8px', backgroundColor: 'rgba(37, 99, 235, 0.2)', border: '1px solid rgba(59, 130, 246, 0.3)', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            <ShieldIcon className="w-5 h-5 text-blue-400" />
           </div>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <h1 style={{ fontWeight: 700, fontSize: '18px', margin: 0, color: '#ffffff' }}>KSP CrimeIntel AI</h1>
-              <span style={{ padding: '2px 8px', fontSize: '11px', backgroundColor: 'rgba(6, 182, 212, 0.2)', color: '#67e8f9', border: '1px solid rgba(6, 182, 212, 0.3)', borderRadius: '9999px', fontFamily: 'monospace' }}>
+              <h1 style={{ fontWeight: 700, fontSize: '17px', margin: 0, color: '#ffffff', letterSpacing: '-0.02em' }}>KSP CrimeIntel AI</h1>
+              <span style={{ padding: '2px 8px', fontSize: '10px', backgroundColor: 'rgba(6, 182, 212, 0.15)', color: '#67e8f9', border: '1px solid rgba(6, 182, 212, 0.3)', borderRadius: '9999px', fontFamily: 'monospace', fontWeight: 600 }}>
                 Catalyst Native
               </span>
             </div>
-            <p style={{ fontSize: '12px', color: '#94a3b8', margin: 0 }}>Karnataka State Police Conversational Intelligence Platform</p>
+            <p style={{ fontSize: '11px', color: '#94a3b8', margin: 0 }}>Karnataka State Police Conversational Intelligence Platform</p>
           </div>
         </div>
 
-        {/* Catalyst Status Badge */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '6px 12px', backgroundColor: 'rgba(30, 41, 59, 0.8)', border: '1px solid #334155', borderRadius: '8px', fontSize: '12px', fontFamily: 'monospace' }}>
-            <ServerIcon className="w-4 h-4 text-emerald-400" />
-            <span style={{ color: '#cbd5e1' }}>Project:</span>
-            <span style={{ color: '#34d399', fontWeight: 600 }}>Project-Rainfall (ID: 48882000000013025)</span>
+        {/* Right Status Badges & Controls */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '6px 10px', backgroundColor: '#0f172a', border: '1px solid #334155', borderRadius: '8px', fontSize: '11px', fontFamily: 'monospace', flexShrink: 0 }}>
+            <ServerIcon className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" />
+            <span style={{ color: '#94a3b8' }}>Project:</span>
+            <span style={{ color: '#34d399', fontWeight: 600 }}>Project-Rainfall</span>
+            <span style={{ color: '#64748b' }}>(ID: 48882000000013025)</span>
           </div>
 
           <button 
             onClick={() => setIsKannada(!isKannada)}
-            style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '6px 12px', backgroundColor: '#1e293b', border: '1px solid #334155', borderRadius: '8px', fontSize: '12px', color: '#f8fafc', cursor: 'pointer' }}
+            style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '6px 12px', backgroundColor: '#1e293b', border: '1px solid #334155', borderRadius: '8px', fontSize: '12px', color: '#f8fafc', cursor: 'pointer', flexShrink: 0 }}
           >
-            <GlobeIcon className="w-4 h-4 text-cyan-400" />
+            <GlobeIcon className="w-3.5 h-3.5 text-cyan-400" />
             <span>{isKannada ? 'ಕನ್ನಡ' : 'English'}</span>
           </button>
 
           <button 
             onClick={() => setShowReportModal(true)}
-            style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '6px 14px', backgroundColor: '#2563eb', border: 'none', borderRadius: '8px', fontSize: '12px', fontWeight: 600, color: '#ffffff', cursor: 'pointer' }}
+            style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '6px 14px', backgroundColor: '#2563eb', border: 'none', borderRadius: '8px', fontSize: '12px', fontWeight: 600, color: '#ffffff', cursor: 'pointer', flexShrink: 0, boxShadow: '0 4px 12px rgba(37, 99, 235, 0.3)' }}
           >
-            <DownloadIcon className="w-4 h-4" />
+            <DownloadIcon className="w-3.5 h-3.5" />
             <span>SCRB Report PDF</span>
           </button>
         </div>
+
       </header>
 
       {/* MAIN CONTAINER */}
@@ -245,15 +250,16 @@ export default function App() {
         {/* LEFT COLUMN: CHAT (4 Cols) */}
         <div style={{ gridColumn: 'span 4', borderRight: '1px solid #1e293b', backgroundColor: 'rgba(15, 23, 42, 0.5)', display: 'flex', flexDirection: 'column', height: '100%' }}>
           
-          <div style={{ padding: '16px', borderBottom: '1px solid #1e293b', display: 'flex', alignItems: 'center', justifyBetween: 'space-between', backgroundColor: 'rgba(15, 23, 42, 0.8)' }}>
+          <div style={{ padding: '14px 16px', borderBottom: '1px solid #1e293b', display: 'flex', alignItems: 'center', justifyBetween: 'space-between', backgroundColor: 'rgba(15, 23, 42, 0.8)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <SparklesIcon className="w-4 h-4 text-cyan-400" />
-              <h2 style={{ fontSize: '14px', fontWeight: 600, margin: 0, color: '#e2e8f0' }}>Conversational AI Investigator</h2>
+              <h2 style={{ fontSize: '13px', fontWeight: 600, margin: 0, color: '#e2e8f0' }}>Conversational AI Investigator</h2>
             </div>
+            <span style={{ fontSize: '10px', padding: '2px 6px', backgroundColor: '#1e293b', color: '#94a3b8', borderRadius: '4px' }}>Catalyst QuickML RAG</span>
           </div>
 
           {/* Quick Query Chips */}
-          <div style={{ padding: '12px', backgroundColor: 'rgba(2, 6, 23, 0.5)', borderBottom: '1px solid #1e293b', display: 'flex', gap: '8px', overflowX: 'auto' }}>
+          <div style={{ padding: '10px 12px', backgroundColor: 'rgba(2, 6, 23, 0.5)', borderBottom: '1px solid #1e293b', display: 'flex', gap: '8px', overflowX: 'auto' }}>
             {SAMPLE_QUERIES.map((sq, idx) => (
               <button
                 key={idx}
@@ -266,31 +272,31 @@ export default function App() {
           </div>
 
           {/* Messages Feed */}
-          <div style={{ flex: 1, padding: '16px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <div style={{ flex: 1, padding: '16px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '14px' }}>
             {messages.map((msg) => (
               <div 
                 key={msg.id}
-                style={{ display: 'flex', gap: '12px', justifyContent: msg.sender === 'user' ? 'flex-end' : 'flex-start' }}
+                style={{ display: 'flex', gap: '10px', justifyContent: msg.sender === 'user' ? 'flex-end' : 'flex-start' }}
               >
                 {msg.sender === 'bot' && (
-                  <div style={{ width: '28px', height: '28px', borderRadius: '8px', backgroundColor: 'rgba(37, 99, 235, 0.3)', border: '1px solid rgba(59, 130, 246, 0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                    <ShieldIcon className="w-4 h-4 text-blue-400" />
+                  <div style={{ width: '28px', height: '28px', borderRadius: '8px', backgroundColor: 'rgba(37, 99, 235, 0.25)', border: '1px solid rgba(59, 130, 246, 0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <ShieldIcon className="w-3.5 h-3.5 text-blue-400" />
                   </div>
                 )}
                 <div style={{
-                  maxWidth: '85%', borderRadius: '12px', padding: '12px', fontSize: '12px', lineHeight: 1.5,
+                  maxWidth: '85%', borderRadius: '12px', padding: '10px 14px', fontSize: '12px', lineHeight: 1.5,
                   backgroundColor: msg.sender === 'user' ? '#2563eb' : 'rgba(30, 41, 59, 0.9)',
                   color: msg.sender === 'user' ? '#ffffff' : '#e2e8f0',
                   border: msg.sender === 'user' ? 'none' : '1px solid #334155'
                 }}>
                   <p style={{ margin: 0 }}>{isKannada && msg.kannadaText ? msg.kannadaText : msg.text}</p>
                   {msg.matchedRecord && (
-                    <div style={{ marginTop: '8px', paddingTop: '8px', borderTop: '1px solid #334155', display: 'flex', justifyContent: 'space-between', fontSize: '11px' }}>
+                    <div style={{ marginTop: '8px', paddingTop: '6px', borderTop: '1px solid #334155', display: 'flex', justifyContent: 'space-between', fontSize: '11px' }}>
                       <span style={{ color: '#67e8f9', fontFamily: 'monospace', fontWeight: 600 }}>{msg.matchedRecord.firNo}</span>
                       <span style={{ color: '#94a3b8' }}>{msg.matchedRecord.station}</span>
                     </div>
                   )}
-                  <span style={{ display: 'block', fontSize: '10px', opacity: 0.6, textAlign: 'right', marginTop: '6px' }}>{msg.timestamp}</span>
+                  <span style={{ display: 'block', fontSize: '10px', opacity: 0.6, textAlign: 'right', marginTop: '4px' }}>{msg.timestamp}</span>
                 </div>
               </div>
             ))}
@@ -301,7 +307,7 @@ export default function App() {
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', backgroundColor: '#020617', border: '1px solid #1e293b', borderRadius: '12px', padding: '6px' }}>
               <button 
                 onClick={handleVoiceToggle}
-                style={{ padding: '8px', background: 'none', border: 'none', color: isListening ? '#ef4444' : '#94a3b8', cursor: 'pointer' }}
+                style={{ padding: '6px', background: 'none', border: 'none', color: isListening ? '#ef4444' : '#94a3b8', cursor: 'pointer' }}
               >
                 <MicIcon className="w-4 h-4" />
               </button>
@@ -317,37 +323,37 @@ export default function App() {
 
               <button
                 onClick={() => handleSendMessage()}
-                style={{ padding: '8px 12px', backgroundColor: '#2563eb', border: 'none', borderRadius: '8px', color: '#ffffff', cursor: 'pointer' }}
+                style={{ padding: '6px 12px', backgroundColor: '#2563eb', border: 'none', borderRadius: '8px', color: '#ffffff', cursor: 'pointer' }}
               >
-                <SendIcon className="w-4 h-4" />
+                <SendIcon className="w-3.5 h-3.5" />
               </button>
             </div>
           </div>
         </div>
 
         {/* RIGHT COLUMN: CANVAS (8 Cols) */}
-        <div style={{ gridColumn: 'span 8', padding: '16px', display: 'flex', flexDirection: 'column', gap: '16px', overflowY: 'auto', height: '100%' }}>
+        <div style={{ gridColumn: 'span 8', padding: '16px', display: 'flex', flexDirection: 'column', gap: '14px', overflowY: 'auto', height: '100%' }}>
           
           {/* METRICS ROW */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px' }}>
             <div style={{ backgroundColor: 'rgba(15, 23, 42, 0.75)', border: '1px solid rgba(255, 255, 255, 0.08)', padding: '12px', borderRadius: '12px' }}>
               <span style={{ fontSize: '11px', color: '#94a3b8' }}>Total FIRs Analyzed</span>
-              <div style={{ fontSize: '20px', fontWeight: 700, color: '#22d3ee', marginTop: '4px', fontFamily: 'monospace' }}>1,248</div>
+              <div style={{ fontSize: '18px', fontWeight: 700, color: '#22d3ee', marginTop: '4px', fontFamily: 'monospace' }}>1,248</div>
             </div>
 
             <div style={{ backgroundColor: 'rgba(15, 23, 42, 0.75)', border: '1px solid rgba(255, 255, 255, 0.08)', padding: '12px', borderRadius: '12px' }}>
               <span style={{ fontSize: '11px', color: '#94a3b8' }}>Active Gang Networks</span>
-              <div style={{ fontSize: '20px', fontWeight: 700, color: '#c084fc', marginTop: '4px', fontFamily: 'monospace' }}>14</div>
+              <div style={{ fontSize: '18px', fontWeight: 700, color: '#c084fc', marginTop: '4px', fontFamily: 'monospace' }}>14</div>
             </div>
 
             <div style={{ backgroundColor: 'rgba(15, 23, 42, 0.75)', border: '1px solid rgba(255, 255, 255, 0.08)', padding: '12px', borderRadius: '12px' }}>
               <span style={{ fontSize: '11px', color: '#94a3b8' }}>Top High-Risk MO</span>
-              <div style={{ fontSize: '14px', fontWeight: 700, color: '#f87171', marginTop: '4px' }}>Bike Snatching</div>
+              <div style={{ fontSize: '13px', fontWeight: 700, color: '#f87171', marginTop: '4px' }}>Bike Snatching</div>
             </div>
 
             <div style={{ backgroundColor: 'rgba(15, 23, 42, 0.75)', border: '1px solid rgba(255, 255, 255, 0.08)', padding: '12px', borderRadius: '12px' }}>
               <span style={{ fontSize: '11px', color: '#94a3b8' }}>Top Crime Hotspot</span>
-              <div style={{ fontSize: '14px', fontWeight: 700, color: '#fbbf24', marginTop: '4px' }}>Indiranagar PS</div>
+              <div style={{ fontSize: '13px', fontWeight: 700, color: '#fbbf24', marginTop: '4px' }}>Indiranagar PS</div>
             </div>
           </div>
 
@@ -355,13 +361,13 @@ export default function App() {
           <div style={{ flex: 1, backgroundColor: 'rgba(15, 23, 42, 0.75)', border: '1px solid #1e293b', borderRadius: '16px', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
             
             {/* Tab Header */}
-            <div style={{ padding: '12px', borderBottom: '1px solid #1e293b', backgroundColor: 'rgba(15, 23, 42, 0.9)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ padding: '10px 14px', borderBottom: '1px solid #1e293b', backgroundColor: 'rgba(15, 23, 42, 0.9)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div style={{ display: 'flex', gap: '6px', backgroundColor: '#020617', padding: '4px', borderRadius: '10px', border: '1px solid #1e293b' }}>
                 <button
                   onClick={() => setActiveTab('map')}
                   style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '6px 12px', borderRadius: '6px', fontSize: '12px', backgroundColor: activeTab === 'map' ? '#2563eb' : 'transparent', color: '#f8fafc', border: 'none', cursor: 'pointer' }}
                 >
-                  <MapPinIcon className="w-4 h-4" />
+                  <MapPinIcon className="w-3.5 h-3.5" />
                   <span>Spatial Hotspots</span>
                 </button>
 
@@ -369,7 +375,7 @@ export default function App() {
                   onClick={() => setActiveTab('network')}
                   style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '6px 12px', borderRadius: '6px', fontSize: '12px', backgroundColor: activeTab === 'network' ? '#7c3aed' : 'transparent', color: '#f8fafc', border: 'none', cursor: 'pointer' }}
                 >
-                  <NetworkIcon className="w-4 h-4" />
+                  <NetworkIcon className="w-3.5 h-3.5" />
                   <span>Suspect Link Graph</span>
                 </button>
 
@@ -377,12 +383,12 @@ export default function App() {
                   onClick={() => setActiveTab('analytics')}
                   style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '6px 12px', borderRadius: '6px', fontSize: '12px', backgroundColor: activeTab === 'analytics' ? '#059669' : 'transparent', color: '#f8fafc', border: 'none', cursor: 'pointer' }}
                 >
-                  <BarChartIcon className="w-4 h-4" />
+                  <BarChartIcon className="w-3.5 h-3.5" />
                   <span>Demographics</span>
                 </button>
               </div>
 
-              <span style={{ fontSize: '12px', color: '#94a3b8', fontFamily: 'monospace' }}>FIR: {selectedRecord.firNo}</span>
+              <span style={{ fontSize: '11px', color: '#94a3b8', fontFamily: 'monospace' }}>FIR: {selectedRecord.firNo}</span>
             </div>
 
             {/* TAB CONTENT AREA */}
@@ -396,24 +402,24 @@ export default function App() {
               )}
 
               {activeTab === 'analytics' && (
-                <div style={{ padding: '24px', overflowY: 'auto' }}>
-                  <h3 style={{ fontSize: '16px', fontWeight: 700, margin: '0 0 8px 0', color: '#f8fafc' }}>Offender Recidivism & Time Distribution Analysis</h3>
-                  <p style={{ fontSize: '12px', color: '#94a3b8', margin: '0 0 20px 0' }}>Aggregated pattern intelligence across Bengaluru and Mysuru divisions.</p>
+                <div style={{ padding: '20px', overflowY: 'auto' }}>
+                  <h3 style={{ fontSize: '15px', fontWeight: 700, margin: '0 0 6px 0', color: '#f8fafc' }}>Offender Recidivism & Time Distribution Analysis</h3>
+                  <p style={{ fontSize: '11px', color: '#94a3b8', margin: '0 0 16px 0' }}>Aggregated pattern intelligence across Bengaluru and Mysuru divisions.</p>
                   
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
-                    <div style={{ padding: '16px', backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '12px' }}>
-                      <span style={{ fontSize: '12px', color: '#94a3b8' }}>Peak Crime Hours</span>
-                      <div style={{ fontSize: '18px', fontWeight: 700, color: '#fbbf24', marginTop: '6px', fontFamily: 'monospace' }}>20:00 - 02:00 IST</div>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '14px' }}>
+                    <div style={{ padding: '14px', backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '12px' }}>
+                      <span style={{ fontSize: '11px', color: '#94a3b8' }}>Peak Crime Hours</span>
+                      <div style={{ fontSize: '16px', fontWeight: 700, color: '#fbbf24', marginTop: '4px', fontFamily: 'monospace' }}>20:00 - 02:00 IST</div>
                     </div>
 
-                    <div style={{ padding: '16px', backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '12px' }}>
-                      <span style={{ fontSize: '12px', color: '#94a3b8' }}>Repeat Offender Rate</span>
-                      <div style={{ fontSize: '18px', fontWeight: 700, color: '#f87171', marginTop: '6px', fontFamily: 'monospace' }}>42.5%</div>
+                    <div style={{ padding: '14px', backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '12px' }}>
+                      <span style={{ fontSize: '11px', color: '#94a3b8' }}>Repeat Offender Rate</span>
+                      <div style={{ fontSize: '16px', fontWeight: 700, color: '#f87171', marginTop: '4px', fontFamily: 'monospace' }}>42.5%</div>
                     </div>
 
-                    <div style={{ padding: '16px', backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '12px' }}>
-                      <span style={{ fontSize: '12px', color: '#94a3b8' }}>Dominant Modus Operandi</span>
-                      <div style={{ fontSize: '18px', fontWeight: 700, color: '#22d3ee', marginTop: '6px', fontFamily: 'monospace' }}>MO-TWO-WHEELER</div>
+                    <div style={{ padding: '14px', backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '12px' }}>
+                      <span style={{ fontSize: '11px', color: '#94a3b8' }}>Dominant Modus Operandi</span>
+                      <div style={{ fontSize: '16px', fontWeight: 700, color: '#22d3ee', marginTop: '4px', fontFamily: 'monospace' }}>MO-TWO-WHEELER</div>
                     </div>
                   </div>
                 </div>
@@ -421,8 +427,8 @@ export default function App() {
             </div>
 
             {/* RECORD DETAIL FOOTER */}
-            <div style={{ padding: '12px 16px', backgroundColor: 'rgba(15, 23, 42, 0.9)', borderTop: '1px solid #1e293b', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '12px' }}>
-              <div style={{ display: 'flex', gap: '12px' }}>
+            <div style={{ padding: '10px 14px', backgroundColor: 'rgba(15, 23, 42, 0.9)', borderTop: '1px solid #1e293b', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '11px' }}>
+              <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
                 <span style={{ fontFamily: 'monospace', fontWeight: 700, color: '#22d3ee' }}>{selectedRecord.firNo}</span>
                 <span style={{ color: '#cbd5e1' }}>{selectedRecord.crimeType}</span>
                 <span style={{ color: '#64748b' }}>|</span>
@@ -443,16 +449,16 @@ export default function App() {
       {/* SCRB REPORT MODAL */}
       {showReportModal && (
         <div style={{ position: 'fixed', inset: 0, zIndex: 100, backgroundColor: 'rgba(2, 6, 23, 0.8)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px' }}>
-          <div style={{ backgroundColor: '#0f172a', border: '1px solid #334155', borderRadius: '16px', maxWidth: '500px', width: '100%', padding: '24px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #1e293b', paddingBottom: '12px', marginBottom: '16px' }}>
+          <div style={{ backgroundColor: '#0f172a', border: '1px solid #334155', borderRadius: '16px', maxWidth: '480px', width: '100%', padding: '20px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #1e293b', paddingBottom: '10px', marginBottom: '14px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <ShieldIcon className="w-5 h-5 text-blue-400" />
-                <h3 style={{ margin: 0, fontWeight: 700, color: '#f8fafc' }}>KSP Executive Crime Intelligence Brief</h3>
+                <h3 style={{ margin: 0, fontWeight: 700, color: '#f8fafc', fontSize: '14px' }}>KSP Executive Crime Intelligence Brief</h3>
               </div>
-              <button onClick={() => setShowReportModal(false)} style={{ background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer' }}>✕</button>
+              <button onClick={() => setShowReportModal(false)} style={{ background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer', fontSize: '16px' }}>✕</button>
             </div>
 
-            <div style={{ fontSize: '12px', fontFamily: 'monospace', color: '#cbd5e1', backgroundColor: '#020617', padding: '16px', borderRadius: '12px', border: '1px solid #1e293b', lineHeight: 1.6 }}>
+            <div style={{ fontSize: '11px', fontFamily: 'monospace', color: '#cbd5e1', backgroundColor: '#020617', padding: '14px', borderRadius: '12px', border: '1px solid #1e293b', lineHeight: 1.6 }}>
               <p style={{ margin: '0 0 6px 0' }}><strong style={{ color: '#60a5fa' }}>DOCUMENT ID:</strong> KSP-SCRB-REPORT-2026-0723</p>
               <p style={{ margin: '0 0 6px 0' }}><strong style={{ color: '#60a5fa' }}>TARGET DIVISION:</strong> Bengaluru East & South Police Divisions</p>
               <p style={{ margin: '0 0 6px 0' }}><strong style={{ color: '#60a5fa' }}>PRIMARY CASE:</strong> {selectedRecord.firNo} ({selectedRecord.crimeType})</p>
@@ -461,14 +467,14 @@ export default function App() {
               <p style={{ margin: 0 }}><strong style={{ color: '#60a5fa' }}>RECOMMENDED ACTION:</strong> Deploy night beat patrols along Indiranagar 100ft Road and Jayanagar 4th Block between 20:00 - 02:00 IST.</p>
             </div>
 
-            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px', marginTop: '20px' }}>
-              <button onClick={() => setShowReportModal(false)} style={{ padding: '8px 16px', backgroundColor: '#1e293b', border: 'none', borderRadius: '8px', color: '#cbd5e1', cursor: 'pointer', fontSize: '12px' }}>Close</button>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px', marginTop: '16px' }}>
+              <button onClick={() => setShowReportModal(false)} style={{ padding: '7px 14px', backgroundColor: '#1e293b', border: 'none', borderRadius: '8px', color: '#cbd5e1', cursor: 'pointer', fontSize: '12px' }}>Close</button>
               <button 
                 onClick={() => {
                   alert("Executive PDF Report generated natively via Zoho Catalyst SmartBrowser!");
                   setShowReportModal(false);
                 }}
-                style={{ padding: '8px 16px', backgroundColor: '#2563eb', border: 'none', borderRadius: '8px', color: '#ffffff', fontWeight: 600, cursor: 'pointer', fontSize: '12px' }}
+                style={{ padding: '7px 14px', backgroundColor: '#2563eb', border: 'none', borderRadius: '8px', color: '#ffffff', fontWeight: 600, cursor: 'pointer', fontSize: '12px' }}
               >
                 Download PDF
               </button>
